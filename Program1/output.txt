@@ -1,0 +1,15 @@
+File source:output.txt
+Original Equation: !((A*!B)+(!A*B))
+Canonical SOP: (A & B) | (~A & ~B)
+Canonical POS: (A | ~B) & (B | ~A)
+Inverse SOP: (A & ~B) | (B & ~A)
+Inverse POS: (A | B) & (~A | ~B)
+Minimized SOP: (A & B) | (A & ~A) | (B & ~B) | (~A & ~B)
+Saved SOP Literals: 0
+Minimized POS: (A | ~B) & (B | ~A)
+Saved POS Literals: 0
+Prime Implicants: 11, 00
+Essential Prime Implicants: 00, 11
+Number of ON-Set Minterms: 2
+Number of ON-Set Maxterms: 2
+----------------------------------------

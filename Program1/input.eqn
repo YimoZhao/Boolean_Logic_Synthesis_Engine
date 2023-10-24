@@ -1,0 +1,1 @@
+out = (a and b and notc) or (nota and d and e) or (b and c and notd and e) or (a and notb and c and d and e)
