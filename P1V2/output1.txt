@@ -1,0 +1,36 @@
+File source:input1.eqn
+Original Equation: (~a & ~b & ~c & ~d) | (a & ~b & ~c & ~d) | (~b & c & ~d) | (b & ~c & d) | (b & c & d) | (~a & b & d)
+Canonical SOP: (a & b & c & d) | (a & b & d & ~c) | (b & c & d & ~a) | (a & c & ~b & ~d) | (b & d & ~a & ~c) | (a & ~b & ~c & ~d) | (c & ~a & ~b & ~d) | (~a & ~b & ~c & ~d)
+Canonical POS: (a | b | c | ~d) & (a | c | d | ~b) & (a | b | ~c | ~d) & (a | d | ~b | ~c) & (b | c | ~a | ~d) & (c | d | ~a | ~b) & (b | ~a | ~c | ~d) & (d | ~a | ~b | ~c)
+Inverse SOP: (a & b & c & ~d) | (a & c & d & ~b) | (a & b & ~c & ~d) | (a & d & ~b & ~c) | (b & c & ~a & ~d) | (c & d & ~a & ~b) | (b & ~a & ~c & ~d) | (d & ~a & ~b & ~c)
+Inverse POS: (a | b | c | d) & (a | b | d | ~c) & (b | c | d | ~a) & (a | c | ~b | ~d) & (b | d | ~a | ~c) & (a | ~b | ~c | ~d) & (c | ~a | ~b | ~d) & (~a | ~b | ~c | ~d)
+Minimized SOP: (b & d) | (~b & ~d)
+Saved SOP Literals: 2
+Minimized POS: (b | ~d) & (d | ~b)
+Saved POS Literals: 2
+Prime Implicants: -1-1, -0-0
+Essential Prime Implicants: -0-0, -1-1
+Number of ON-Set Minterms: 8
+Number of ON-Set Maxterms: 8
+----------------------------------------
+
+Truth Table:
+Variables: a, b, c, d
+---------------------------------------------
+        0 0 0 0 : 1
+        0 0 0 1 : 0
+        0 0 1 0 : 1
+        0 0 1 1 : 0
+        0 1 0 0 : 0
+        0 1 0 1 : 1
+        0 1 1 0 : 0
+        0 1 1 1 : 1
+        1 0 0 0 : 1
+        1 0 0 1 : 0
+        1 0 1 0 : 1
+        1 0 1 1 : 0
+        1 1 0 0 : 0
+        1 1 0 1 : 1
+        1 1 1 0 : 0
+        1 1 1 1 : 1
+Transistor numbers needed to implement this SOP format directly with AND, NOT, OR gates: 218
