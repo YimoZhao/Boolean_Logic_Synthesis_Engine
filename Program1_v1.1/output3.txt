@@ -1,0 +1,22 @@
+File source:input3.eqn
+Original Equation: ~A | A
+Canonical SOP: A | ~A
+Canonical POS: True
+Inverse SOP: False
+Inverse POS: A & ~A
+Minimized SOP: A | ~A
+Saved SOP Literals: 0
+Minimized POS: A | ~A
+Saved POS Literals: -1
+Prime Implicants: -
+Essential Prime Implicants: -
+Number of ON-Set Minterms: 2
+Number of ON-Set Maxterms: 0
+----------------------------------------
+
+Truth Table:
+Variables: A
+------------------------------
+              0 : 1
+              1 : 1
+Transistor numbers needed to implement this SOP format directly with AND, NOT, OR gates: 8

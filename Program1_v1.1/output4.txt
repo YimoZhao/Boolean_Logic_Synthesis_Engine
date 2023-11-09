@@ -1,0 +1,28 @@
+File source:input4.eqn
+Original Equation: A & (B | C) | C
+Canonical SOP: (A & B & C) | (A & B & ~C) | (A & C & ~B) | (B & C & ~A) | (C & ~A & ~B)
+Canonical POS: (A | B | C) & (A | C | ~B) & (B | C | ~A)
+Inverse SOP: (A & ~B & ~C) | (B & ~A & ~C) | (~A & ~B & ~C)
+Inverse POS: (A | B | ~C) & (A | ~B | ~C) & (B | ~A | ~C) & (C | ~A | ~B) & (~A | ~B | ~C)
+Minimized SOP: C | (A & B)
+Saved SOP Literals: 0
+Minimized POS: (A | C) & (B | C)
+Saved POS Literals: 0
+Prime Implicants: --1, 11-
+Essential Prime Implicants: --1, 11-
+Number of ON-Set Minterms: 5
+Number of ON-Set Maxterms: 3
+----------------------------------------
+
+Truth Table:
+Variables: A, B, C
+----------------------------------------
+          0 0 0 : 0
+          0 0 1 : 1
+          0 1 0 : 0
+          0 1 1 : 1
+          1 0 0 : 0
+          1 0 1 : 1
+          1 1 0 : 1
+          1 1 1 : 1
+Transistor numbers needed to implement this SOP format directly with AND, NOT, OR gates: 94
