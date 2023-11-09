@@ -1,7 +1,0 @@
-not (Bnot, B)
-and (and0, Bnot, A)
-not (and0not, and0)
-not (Anot, A)
-and (and1, Anot, B)
-or  (or0, and0not, and1)
-out (or0)

@@ -1,8 +1,0 @@
-and (and0,A,B,C)
-and (and1,A,B,D)
-and (and2,B,C,D)
-and (and3,A,C,D)
-or (or0,and0,and1)
-or (or1,and3,or0)
-or (or2,or1,and2)
-out (or2)
