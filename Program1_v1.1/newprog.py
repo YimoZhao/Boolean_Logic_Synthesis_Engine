@@ -22,6 +22,14 @@ def convert_eqn(eqn_str):
 #     return bool_eqn_str.replace("!","~").replace('*', '&').replace('+', '|')
 
 
+from sympy import symbols, simplify_logic, S
+
+def false_detect(expr_str):
+    expr = sp.sympify(expr_str)
+    simplified_expr = simplify_logic(expr)
+    return simplified_expr == S.false
+
+
 def _generate_minterms_or_maxterms(expr):
     variables = sorted(list(expr.free_symbols), key=lambda x: str(x))
     
@@ -164,57 +172,65 @@ def write_results(filename, eqn_list,src_file):
     with open(filename, 'w') as file:
         print("File opened")
         for eqn in eqn_list:
-            sop = to_canonical_SOP(eqn)
-            expr_dnf = to_canonical_SOP(eqn)
-            pos = to_canonical_POS(eqn)
-            inv_sop = inverse_SOP(eqn)
-            inv_pos = inverse_POS(eqn)
-            min_sop, saved_sop_literals = minimized_SOP(eqn)
-            min_pos, saved_pos_literals = minimized_POS(eqn)
-            prime_implicants = calculate_prime_implicants(eqn)
-            essential_prime_implicants = calculate_essential_prime_implicants(eqn, prime_implicants)  
-            on_set_minterms = extract_ON_set_minterms(sop)  
-            on_set_maxterms = extract_ON_set_maxterms(sop)  
-            ############# truth table
-            expr = sp.sympify(eqn)
-            variables = sorted(expr.free_symbols, key=str)
-            truth_values = list(itertools.product([False, True], repeat=len(variables)))
-            results = [expr.subs(dict(zip(variables, vals))) for vals in truth_values]
-            numeric_results = [1 if res is sp.true else 0 for res in results]
-            ############# end truth table
-            ############# transistor count
-            expr_str = str(min_sop)
-            count_or = expr_str.count('|')
-            count_and = expr_str.count('&')
-            count_not = expr_str.count('~')
-            count_trans = count_or * 6 + count_and * 6 + count_not * 2
-            ############# end trnasistor count
+            if false_detect(eqn):                
+                print("\n\n-------Exporting Results--------")
+                file.write(f"File source:{src_file}\n")
+                #file.write(f"File type:{sel}\n")
+                file.write(f"Original Equation: {eqn}\n")
+                file.write(f"Equation is always False\n")
+                
+            else:
+                sop = to_canonical_SOP(eqn)
+                expr_dnf = to_canonical_SOP(eqn)
+                pos = to_canonical_POS(eqn)
+                inv_sop = inverse_SOP(eqn)
+                inv_pos = inverse_POS(eqn)
+                min_sop, saved_sop_literals = minimized_SOP(eqn)
+                min_pos, saved_pos_literals = minimized_POS(eqn)
+                prime_implicants = calculate_prime_implicants(eqn)
+                essential_prime_implicants = calculate_essential_prime_implicants(eqn, prime_implicants)  
+                on_set_minterms = extract_ON_set_minterms(sop)  
+                on_set_maxterms = extract_ON_set_maxterms(sop)  
+                ############# truth table
+                expr = sp.sympify(eqn)
+                variables = sorted(expr.free_symbols, key=str)
+                truth_values = list(itertools.product([False, True], repeat=len(variables)))
+                results = [expr.subs(dict(zip(variables, vals))) for vals in truth_values]
+                numeric_results = [1 if res is sp.true else 0 for res in results]
+                ############# end truth table
+                ############# transistor count
+                expr_str = str(min_sop)
+                count_or = expr_str.count('|')
+                count_and = expr_str.count('&')
+                count_not = expr_str.count('~')
+                count_trans = count_or * 6 + count_and * 6 + count_not * 2
+                ############# end trnasistor count
 
-            print("\n\n-------Exporting Results--------")
-            file.write(f"File source:{src_file}\n")
-            #file.write(f"File type:{sel}\n")
-            file.write(f"Original Equation: {eqn}\n")
-            file.write(f"Canonical SOP: {sop}\n")
-            file.write(f"Canonical POS: {pos}\n")
-            file.write(f"Inverse SOP: {inv_sop}\n")
-            file.write(f"Inverse POS: {inv_pos}\n")
-            file.write(f"Minimized SOP: {min_sop}\n")
-            file.write(f"Saved SOP Literals: {saved_sop_literals}\n")
-            file.write(f"Minimized POS: {min_pos}\n")
-            file.write(f"Saved POS Literals: {saved_pos_literals}\n")
-            file.write(f"Prime Implicants: {', '.join(map(str, prime_implicants))}\n")
-            file.write(f"Essential Prime Implicants: {', '.join(map(str, essential_prime_implicants))}\n")  
-            file.write(f"Number of ON-Set Minterms: {len(on_set_minterms)}\n") 
-            file.write(f"Number of ON-Set Maxterms: {len(on_set_maxterms)}\n") 
-            file.write("-" * 40 + "\n")
-            file.write("\nTruth Table:\n")
-            file.write("Variables: " + ', '.join([str(v) for v in variables]) + "\n")
-            file.write("-" * (25 + len(variables) * 5) + "\n")
-            for vals, res in zip(truth_values, numeric_results):
-                vals_as_numbers = [1 if v else 0 for v in vals]
-                file.write(f"{' '.join(map(str,vals_as_numbers)):>15} : {res}\n")
-            file.write("Transistor numbers needed to implement this SOP format directly with")
-            file.write(f" AND, NOT, OR gates: {count_trans}\n")
+                print("\n\n-------Exporting Results--------")
+                file.write(f"File source:{src_file}\n")
+                #file.write(f"File type:{sel}\n")
+                file.write(f"Original Equation: {eqn}\n")
+                file.write(f"Canonical SOP: {sop}\n")
+                file.write(f"Canonical POS: {pos}\n")
+                file.write(f"Inverse SOP: {inv_sop}\n")
+                file.write(f"Inverse POS: {inv_pos}\n")
+                file.write(f"Minimized SOP: {min_sop}\n")
+                file.write(f"Saved SOP Literals: {saved_sop_literals}\n")
+                file.write(f"Minimized POS: {min_pos}\n")
+                file.write(f"Saved POS Literals: {saved_pos_literals}\n")
+                file.write(f"Prime Implicants: {', '.join(map(str, prime_implicants))}\n")
+                file.write(f"Essential Prime Implicants: {', '.join(map(str, essential_prime_implicants))}\n")  
+                file.write(f"Number of ON-Set Minterms: {len(on_set_minterms)}\n") 
+                file.write(f"Number of ON-Set Maxterms: {len(on_set_maxterms)}\n") 
+                file.write("-" * 40 + "\n")
+                file.write("\nTruth Table:\n")
+                file.write("Variables: " + ', '.join([str(v) for v in variables]) + "\n")
+                file.write("-" * (25 + len(variables) * 5) + "\n")
+                for vals, res in zip(truth_values, numeric_results):
+                    vals_as_numbers = [1 if v else 0 for v in vals]
+                    file.write(f"{' '.join(map(str,vals_as_numbers)):>15} : {res}\n")
+                file.write("Transistor numbers needed to implement this SOP format directly with")
+                file.write(f" AND, NOT, OR gates: {count_trans}\n")
             print("Export completed")
 
 
