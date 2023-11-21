@@ -1,0 +1,6 @@
+out = (C and notD and J and notF) or (notB and C and notD and F) or (A and notC and D) or (A and B and D) or (notC and notJ)
+out = (A and C and D and J and G) or (notA and notB and C and F and G) or (notB and notC and notJ and F and H) or (B and notC and J and G and notH) or (A and B and notD and J and H)
+out = (nota and notb and notc and notd) or (a and notb and notc and notd) or (notb and c and notd) or (b and notc and d) or (b and c and d) or (nota and b and d)
+out = notA or A
+out = A and (B or C) or C
+out = nota and notb and (notc and d or notc and notd) or nota and b and notc and d or a and b and (c or d) or a and notc and d

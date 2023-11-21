@@ -1,0 +1,4 @@
+X = a and notc and d or a and notb and notc and d or notb and c or notc
+Y = X and a or b and c
+Z = X and Y or notX and d
+U = notZ and a and notb and d
