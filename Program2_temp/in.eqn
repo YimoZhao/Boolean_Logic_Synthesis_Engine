@@ -1,0 +1,5 @@
+F = (!A * !B * !C * !D)+(A * !B * !C * !D)+(!B * C * !D) + (B * !C * D) + (B * C * D) + (!A * B * D)
+G = !A + B * C * D * E * F
+H = !A * A
+I = A * (B + C) + c
+J = !A * !B * (!C * D + !C + !D) + !A * B *!C * D + A * B * (C + D) + A * !C * D

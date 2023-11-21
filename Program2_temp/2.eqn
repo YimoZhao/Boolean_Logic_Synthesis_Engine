@@ -1,0 +1,9 @@
+V = F * !H + !A * L + !B * !C * !H
+Z = B * D *!C + !C * A * !D + V + T
+W = N + !M + !B * F + A * L
+J = A * K + !A * K + C * !D + C * e
+K = J * L * N * M + T + !V
+L = A + B + C + D + F + e
+N = !L + G + H * L + !H * V * T
+M = T * G * !H * L + C * !D
+T = J * K +!K + e + F + L + !G
